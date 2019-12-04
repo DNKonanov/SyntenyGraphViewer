@@ -1,0 +1,76 @@
+{
+  "name": "react-electron-demo",
+  "version": "0.1.0",
+  "private": true,
+  "main": "app/index.js",
+  "description": "A template for electron app with react.",
+  "author": {
+    "name": "DNKonanov",
+    "email": "konanovdmitriy@gmail.com"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
+    "start:react": "cross-env BROWSER=none react-app-rewired start",
+    "start:electron": "wait-on http://localhost:3000 && electron app",
+    "build": "npm run build:react-copy && npm run pack",
+    "build:win": "npm run build:react-copy && npm run pack:win",
+    "build:react": "react-app-rewired build",
+    "build:react-copy": "npm run build:react && npm run copy:electron",
+    "pack": "electron-builder",
+    "pack:win": "electron-builder --win",
+    "copy:electron": "cp -r ./app/. ./build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject"
+  },
+  "dependencies": {
+    "electron-debug": "^2.0.0",
+    "electron-is-dev": "^0.3.0",
+    "electron-log": "^2.2.16",
+    "electron-updater": "^4.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.1",
+    "cross-env": "^5.2.0",
+    "devtron": "^1.4.0",
+    "electron": "^2.0.5",
+    "electron-builder": "^20.26.1",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-packager": "^14.1.1",
+    "react-app-rewired": "^1.5.2",
+    "react-scripts": "^1.1.4",
+    "wait-on": "^2.1.0"
+  },
+  "build": {
+    "productName": "Electron-React-Test",
+    "extends": null,
+    "files": [
+      "build/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "private": false
+    },
+    "mac": {
+      "icon": "icons/icon.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icons/icon.png"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "icons/icon.png"
+    },
+    "extraMetadata": {
+      "main": "build/index.js"
+    },
+    "directories": {
+      "buildResources": "assets"
+    }
+  }
+}
