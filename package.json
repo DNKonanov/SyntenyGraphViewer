@@ -28,7 +28,7 @@
     "electron-log": "^2.2.16",
     "electron-updater": "^4.0.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "concurrently": "^3.6.1",
